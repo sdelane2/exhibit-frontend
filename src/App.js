@@ -1,25 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+import ArtworkContainer from './Containers/ArtworkContainer'
+import HomeContainer from './Containers/HomeContainer'
+import {Route, Switch} from 'react-router-dom'
+import ExhibitionContainer from './Containers/ExhibitionContainer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends React.Component {
+
+
+
+  render() {
+    return(
+      <div className="App">
+        <Switch>
+          <Route path="/" exact>
+            <HomeContainer />
+          </Route>
+          <Route path='/explore' component={ExhibitionContainer}/>
+        </Switch>
     </div>
-  );
+    )
+  }
+
 }
 
-export default App;
+export default App
