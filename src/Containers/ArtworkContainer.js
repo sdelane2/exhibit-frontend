@@ -24,7 +24,7 @@ class ArtworkContainer extends React.Component {
     
 
     return(
-        <div class="flex-container" id="artwork-container">
+        <div className="flex-container" id="artwork-container">
         {this.state.artworks.map(artwork => <Artwork artwork={artwork} />)}
         </div>
     )

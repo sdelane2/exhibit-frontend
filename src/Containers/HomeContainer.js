@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button, Divider, Grid, Segment } from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
+import Signup from '../Components/Signup.js'
+import Login from '../Components/Login.js'
 
 
 
@@ -12,16 +14,16 @@ class HomeContainer extends React.Component {
         
     
         return(
-            <Segment placeholder clearing>
+            <Segment id="home-container" placeholder clearing>
               <Grid columns={2} relaxed='very' stackable>
                 <Grid.Column>
                   <Grid.Column verticalAlign='middle'>
-                  <Button content='User' icon='user circle' size='big' as={NavLink} name='exhibitionContainer' to='/explore' />
+                  <Signup signupHandler={this.props.signupHandler} />
                 </Grid.Column>
                 </Grid.Column>
           
                 <Grid.Column verticalAlign='middle'>
-                  <Button content='Gallery' icon='paint brush' size='big' />
+                    <Login loginHandler={this.props.loginHandler} />
                 </Grid.Column>
               </Grid>
           

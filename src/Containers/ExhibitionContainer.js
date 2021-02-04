@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react'
-import Exhibition from '../Components/Exhibition.js'
+import ExhibitionThumbnail from '../Components/ExhibitionThumbnail.js'
 
 class ExhibitionContainer extends React.Component {
 
@@ -8,11 +8,14 @@ class ExhibitionContainer extends React.Component {
         exhibitions: []
     }
 
+    thumbnailClickHandler = () => {
+
+    }
+
     componentDidMount(){
         fetch("http://localhost:3000/exhibitions")
         .then(r => r.json())
         .then(data => {
-            console.log(data)
           this.setState({exhibitions: data})
           console.log(this.state)
         })
@@ -20,8 +23,8 @@ class ExhibitionContainer extends React.Component {
     }
     render() {
         return(
-            <div class="flex-container" id="artwork-container">
-            {this.state.exhibitions.map(exhibition => <Exhibition exhibition={exhibition} />)}
+            <div className="flex-container" id="artwork-container">
+            {this.state.exhibitions.map(exhibition => <ExhibitionThumbnail exhibition={exhibition} container={true} key={exhibition.id} />)}
             </div>
         )
     }

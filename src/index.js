@@ -5,16 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
+import {Provider} from 'react-redux'
+import rootReducer from './Redux/rootReducer'
 
 
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   
+
+  <Provider store={store}>
     <Router>
       <Route>
       <App />
       </Route>
-    </Router>,
+    </Router>
+  </Provider>,
+  
   document.getElementById('root')
 );
 
