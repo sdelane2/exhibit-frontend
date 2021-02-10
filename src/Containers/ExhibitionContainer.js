@@ -1,33 +1,42 @@
 import { render } from '@testing-library/react';
 import React from 'react'
+import {connect} from 'react-redux'
 import ExhibitionThumbnail from '../Components/ExhibitionThumbnail.js'
+import {userExhibitions, addExhibitionToFavorites} from '../Redux/actions.js'
 
 class ExhibitionContainer extends React.Component {
 
-    state = {
-        exhibitions: []
-    }
-
-    thumbnailClickHandler = () => {
-
-    }
-
     componentDidMount(){
-        fetch("http://localhost:3000/exhibitions")
-        .then(r => r.json())
-        .then(data => {
-          this.setState({exhibitions: data})
-          console.log(this.state)
-        })
-    
+        this.props.getExhibitions()
     }
+
+
+
+    exhibitionFunction = () => {
+        return this.props.exhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={true}  image={exhibition.image} addFavoriteExhibition={this.props.addFavoriteExhibition} user={this.props.user}/>)
+    }
+
     render() {
         return(
             <div className="flex-container" id="artwork-container">
-            {this.state.exhibitions.map(exhibition => <ExhibitionThumbnail exhibition={exhibition} container={true} key={exhibition.id} />)}
+                {this.exhibitionFunction()}
+                in the explore page
             </div>
         )
     }
 }
 
-export default ExhibitionContainer
+const msp = state => {
+    return {
+    exhibitions: state.galleryExhibitions
+    }
+}
+
+const mdp = dispatch => {
+    return {
+        getExhibitions: () => dispatch(userExhibitions()),
+        addFavoriteExhibition: (exhibitionObj) => dispatch(addExhibitionToFavorites(exhibitionObj))
+    }
+}
+
+export default connect(msp, mdp)(ExhibitionContainer)

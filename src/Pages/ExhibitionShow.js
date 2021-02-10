@@ -1,30 +1,43 @@
 import React from 'react'
 import Artwork from '../Components/Artwork.js'
+import {connect} from 'react-redux'
+import {getExhibitedArtworks, addArtworkToFavorites} from '../Redux/actions.js'
 
 class ExhibitionShow extends React.Component {
    
-    state = {
-        exhibitedArtworks: []
-    }
+    
 
     componentDidMount(){
-        fetch(`http://localhost:3000/exhibitions/${this.props.match.params.id}`)
-        .then(r => r.json())
-        .then(data => {
-          this.setState({exhibitedArtworks: data.exhibited_artworks})
-        })
+        this.props.getAllExhibitedArtworks(this.props.match.params.id)
     
     }
     
     render(){
+        console.log(this.props.myExhibitedArtworks)
+        let artworks = this.props.myExhibitedArtworks.map(artwork =>  <Artwork artwork={artwork.gallery_artwork} container={true} id={artwork.id} addFavoriteArtwork={this.props.addFavoriteArtwork} user={this.props.user} />)
         return(
             <div class="flex-container" id="artwork-container">
                 {console.log(this.props)}
-                {this.state.exhibitedArtworks.map(artwork => <Artwork artwork={artwork} container={true} />)}
+                {artworks}
             </div>
         )
     }
 }
 
-export default ExhibitionShow
+const msp = state => {
+    return {
+    myExhibitedArtworks: state.exhibitedArtworks
+    }
+}
+
+const mdp = dispatch => {
+    return {
+        getAllExhibitedArtworks: (exhibitionId) => dispatch(getExhibitedArtworks(exhibitionId)),
+        addFavoriteArtwork: (artworkObj) => dispatch(addArtworkToFavorites(artworkObj))
+
+
+    }
+}
+
+export default connect(msp, mdp)(ExhibitionShow)
 

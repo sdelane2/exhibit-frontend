@@ -17,7 +17,6 @@ class GalleryContainer extends React.Component{
   
     exhibitionFunction = () => {
         return this.props.myExhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={false} key={exhibition.id} image={exhibition.image} deleteExhibition={this.deleteExhibition}/>)
-
     }
 
     deleteExhibition = (id) => {
@@ -37,7 +36,8 @@ class GalleryContainer extends React.Component{
                 {console.log(this.props.myExhibitions)}
                 <ExhibitionForm gallery={this.props.gallery} />
                 </div>
-                <GalleryArtworkContainer />
+                {console.log(localStorage)}
+                <GalleryArtworkContainer gallery={this.props.gallery} exhibitions={this.props.myExhibitions}/>
 
             </div>
             
