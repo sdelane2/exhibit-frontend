@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button, Form, Input, Modal, TextArea } from 'semantic-ui-react'
+
 
 class Login extends React.Component{
     
@@ -17,6 +19,7 @@ class Login extends React.Component{
     handleSubmit = e => {
         e.preventDefault()
         this.props.loginHandler(this.state)
+        // this.props.startSession()
         console.log(this.props)
     }
 
@@ -33,7 +36,7 @@ class Login extends React.Component{
                     <div className="inputBox">
                         <input type="password" placeholder="password" value={this.state.password} onChange={this.handleChange} name="password"/>
                     </div>
-                    <input type="submit" name="sign-in" value="Sign In"></input><br></br>
+                    <Button>Sign in</Button><br></br>
                 </form>
             </div>
     

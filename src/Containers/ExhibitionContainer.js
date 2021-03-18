@@ -2,25 +2,38 @@ import { render } from '@testing-library/react';
 import React from 'react'
 import {connect} from 'react-redux'
 import ExhibitionThumbnail from '../Components/ExhibitionThumbnail.js'
-import {userExhibitions, addExhibitionToFavorites} from '../Redux/actions.js'
+import {userExhibitions, addExhibitionToFavorites, getFavoriteExhibitions, deleteFavoriteExhibition} from '../Redux/actions.js'
+import {Container, Grid, Header} from 'semantic-ui-react'
+
 
 class ExhibitionContainer extends React.Component {
 
+    
+
     componentDidMount(){
+        console.log(this.state)
         this.props.getExhibitions()
+        this.props.favoriteExhibitions(this.props.user.id)
+
     }
 
 
 
     exhibitionFunction = () => {
-        return this.props.exhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={true}  image={exhibition.image} addFavoriteExhibition={this.props.addFavoriteExhibition} user={this.props.user}/>)
+        let publishedExhibitions = this.props.exhibitions.filter(exhibition => exhibition.published === true )
+        return publishedExhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={true}  image={exhibition.image} addFavoriteExhibition={this.props.addFavoriteExhibition} user={this.props.user} faves={this.props.faves} deleteFave={this.props.deleteFave}/>)
+
     }
 
     render() {
         return(
-            <div className="flex-container" id="artwork-container">
-                {this.exhibitionFunction()}
-                in the explore page
+            <div>
+                <br></br> 
+            <Container>
+                <Grid container centered columns={3}  padded="vertically">
+                    {this.exhibitionFunction()}
+                </Grid>
+            </Container>
             </div>
         )
     }
@@ -28,14 +41,18 @@ class ExhibitionContainer extends React.Component {
 
 const msp = state => {
     return {
-    exhibitions: state.galleryExhibitions
+    exhibitions: state.userExhibitions,
+    faves: state.favoriteExhibitions,
+
     }
 }
 
 const mdp = dispatch => {
     return {
+        favoriteExhibitions: (userId) => dispatch(getFavoriteExhibitions(userId)),
         getExhibitions: () => dispatch(userExhibitions()),
-        addFavoriteExhibition: (exhibitionObj) => dispatch(addExhibitionToFavorites(exhibitionObj))
+        addFavoriteExhibition: (exhibitionObj) => dispatch(addExhibitionToFavorites(exhibitionObj)),
+        deleteFave: (id) => dispatch(deleteFavoriteExhibition(id))
     }
 }
 

@@ -15,7 +15,16 @@ import {
     USER_EXHIBITIONS,
     NEW_EXHIBITED_ARTWORK,
     FAVORITE_EXHIBITION,
-    FAVORITE_ARTWORK
+    FAVORITE_ARTWORK, 
+    UPDATE_EXHIBITION,
+    FAVORITE_EXHIBITIONS,
+    FAVORITE_ARTWORKS,
+    REMOVE_FAVORITE_EXHIBITION,
+    REMOVE_EXHIBITED_ARTWORK,
+    REMOVE_FAVORITE_ARTWORK,
+    USER_EXHIBITED_ARTWORKS,
+    LOGOUT,
+    PAGE_LOADING_DONE
 } from './actionTypes'
 
 /**** GALLERY_USER ACTIONS ****/
@@ -101,6 +110,7 @@ export function loginUser(userInfo) {
         .then((r) => r.json())
         .then((data) => {
             console.log("logging in user", data)
+            localStorage.removeItem("gallery")
             localStorage.setItem("token", data.jwt);
             localStorage.setItem("user", data.user.id);
             dispatch({type: LOGIN_USER, payload: data.user})
@@ -120,13 +130,16 @@ export function loginGallery(galleryInfo) {
       })
         .then((r) => r.json())
         .then((data) => {
-            console.log("logging in gallery", data)
-          localStorage.setItem("token", data.jwt);
-          localStorage.setItem("gallery", data.gallery.id);
+        console.log("logging in gallery", data)
+        localStorage.removeItem("user")
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("gallery", data.gallery.id);
           dispatch({type: LOGIN_GALLERY, payload: data.gallery})
       })
     }
 }
+
+
 
 export function getExhibitions(galleryId){
     const token = localStorage.getItem('token')
@@ -139,6 +152,7 @@ export function getExhibitions(galleryId){
         .then(data => {
             console.log("getting exhibitions", data)
             dispatch({type: EXHIBITIONS, payload: data.filter(d => d.gallery_id === galleryId)})
+
         })
     }
 }
@@ -156,6 +170,7 @@ export function userExhibitions(){
             console.log(data)
             console.log(localStorage)
             dispatch({type: USER_EXHIBITIONS, payload: data})
+            dispatch({type: PAGE_LOADING_DONE, payload: true})
         })
     }
 }
@@ -172,6 +187,24 @@ export function getExhibitedArtworks(exhibitionId){
             console.log(data)
             
             dispatch({type: EXHIBITED_ARTWORKS, payload: data.filter(d => d.exhibition_id === parseInt(exhibitionId))})
+            dispatch({type: PAGE_LOADING_DONE, payload: false})
+        })
+    }
+}
+
+export function getUserExhibitedArtworks(exhibitionId){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/exhibited_artworks`, {
+            method: "GET",
+            headers: {Authorization: `Bearer ${token}`},
+          })
+        .then(r => r.json())
+        .then(data => {
+            console.log(data)
+            
+            dispatch({type: USER_EXHIBITED_ARTWORKS, payload: data.filter(d => d.exhibition_id === parseInt(exhibitionId))})
+            dispatch({type: PAGE_LOADING_DONE, payload: false})
         })
     }
 }
@@ -209,6 +242,8 @@ export function getGalleryArtworks(galleryId){
         .then(data => {
             console.log(data)
             dispatch({type: GALLERY_ARTWORKS, payload: data.filter(d => d.gallery_id === galleryId)})
+            dispatch({type: PAGE_LOADING_DONE, payload: true})
+
         })
     }
 }
@@ -316,3 +351,121 @@ export function addArtworkToFavorites(artworkObj){
         })
     }
 }
+
+export function updateExhibition(exhibitionId, updateObj){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/exhibitions/${exhibitionId}`, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(updateObj)
+        })
+        .then(r => r.json())
+        .then(updatedExhibition => {
+            dispatch({type: UPDATE_EXHIBITION, payload: updatedExhibition})
+        })
+    }
+}
+
+export function getExhibition(exhibitionId){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/exhibitions/${exhibitionId}`, {
+            method: "GET",
+            headers: {Authorization: `Bearer ${token}`},
+          })
+        .then(r => r.json())
+        .then(data => {
+            console.log("getting exhibition", data)
+            dispatch({type: EXHIBITIONS, payload: data})
+        })
+    }
+}
+
+export function getFavoriteArtworks(userId){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch('http://localhost:3000/favorite_artworks', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+        })
+        .then(r => r.json())
+        .then(data => {
+            
+            dispatch({type: FAVORITE_ARTWORKS, payload: data.filter(d => d.user_id === userId)})
+        })
+    }
+}
+
+export function getFavoriteExhibitions(userId){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch('http://localhost:3000/favorite_exhibitions', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+        })
+        .then(r => r.json())
+        .then(data => {
+            
+            dispatch({type: FAVORITE_EXHIBITIONS, payload: data.filter(d => d.user_id === userId)})
+        })
+    }
+}
+
+export function deleteFavoriteExhibition(id){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/favorite_exhibitions/${id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type' : 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        dispatch({type: REMOVE_FAVORITE_EXHIBITION, payload: id})
+    }
+}
+
+export function deleteExhibitedArtwork(id){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/exhibited_artworks/${id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type' : 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        dispatch({type: REMOVE_EXHIBITED_ARTWORK, payload: id})
+    }
+}
+
+export function deleteFavoriteArtwork(id){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/favorite_artworks/${id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type' : 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        dispatch({type: REMOVE_FAVORITE_ARTWORK, payload: id})
+    }
+}
+
+export function logOutUser(){
+    return {type: LOGOUT}
+}
+
+
+

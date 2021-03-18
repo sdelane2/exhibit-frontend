@@ -1,22 +1,25 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import {connect} from 'react-redux'
 import ExhibitionThumbnail from '../Components/ExhibitionThumbnail.js'
-import GalleryArtworkContainer from './GalleryArtworkContainer.js'
-import {getExhibitions, deleteFromExhibitions} from '../Redux/actions.js'
+import {getExhibitions, deleteFromExhibitions, updateExhibition} from '../Redux/actions.js'
 import ExhibitionForm from '../Components/ExhibitionForm.js'
+import {Container, Grid, Header, Divider} from 'semantic-ui-react'
+const GalleryArtworkContainer = React.lazy(() => import('./GalleryArtworkContainer.js'));
 
 class GalleryContainer extends React.Component{
 
     
-
     componentDidMount(){
         
         this.props.getGalleryExhibitions(parseInt(localStorage.gallery))
+        console.log(localStorage)
+        this.setState({page: this.props.page === true})
+
     }
     
   
     exhibitionFunction = () => {
-        return this.props.myExhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={false} key={exhibition.id} image={exhibition.image} deleteExhibition={this.deleteExhibition}/>)
+        return this.props.myExhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={false} key={exhibition.id} image={exhibition.image} deleteExhibition={this.deleteExhibition} published={exhibition.published} updateExh={this.props.updateExh} exhibitions={this.props.myExhibitions}/>)
     }
 
     deleteExhibition = (id) => {
@@ -26,21 +29,35 @@ class GalleryContainer extends React.Component{
     render(){
         
     
-        console.log(this.props.myExhibitions)
+        console.log(this.props.page)
         return(
-            <div className="flex-container" id="artwork-container">
-            <div className="flex-item">
-                Exhibitions:
-                {this.exhibitionFunction()}
+            <div >
                 <br></br>
-                {console.log(this.props.myExhibitions)}
+                <Header as="h2">{this.props.gallery.name} gallery</Header>
                 <ExhibitionForm gallery={this.props.gallery} />
-                </div>
-                {console.log(localStorage)}
-                <GalleryArtworkContainer gallery={this.props.gallery} exhibitions={this.props.myExhibitions}/>
-
-            </div>
+                <br></br><br></br>
+                <Container>
+                
             
+                    <Grid relaxed columns={3} centered>
+                        {this.exhibitionFunction()}
+                        
+                        
+                        
+                    </Grid>
+                    
+                </Container>
+               
+                <Divider section />
+                <Suspense fallback={<div>Loading...</div>}>
+                <Container>
+                
+
+                    <GalleryArtworkContainer gallery={this.props.gallery} exhibitions={this.props.myExhibitions}/>
+                
+                </Container>
+                </Suspense>
+            </div>
         )
     }
 }
@@ -48,14 +65,17 @@ class GalleryContainer extends React.Component{
 const msp = state => {
     return {
     gallery: state.gallery,
-    myExhibitions: state.galleryExhibitions
+    myExhibitions: state.galleryExhibitions,
+    page: state.loadPage
     }
 }
 
 const mdp = dispatch => {
     return {
         getGalleryExhibitions: (galleryId) => dispatch(getExhibitions(galleryId)),
-        deleteExhibition: (id) => dispatch(deleteFromExhibitions(id))
+        deleteExhibition: (id) => dispatch(deleteFromExhibitions(id)),
+        updateExh: (exhibitionId, updateObj) => dispatch(updateExhibition(exhibitionId, updateObj))
+
 
     }
 }

@@ -1,36 +1,48 @@
 import './App.css';
 import "./fonts/Heebo-Light.ttf";
-import React from 'react'
+import React, {Suspense} from 'react'
 import ArtworkContainer from './Containers/ArtworkContainer'
-import HomeContainer from './Containers/HomeContainer'
 import {Route, Switch, withRouter} from 'react-router-dom'
-import ExhibitionContainer from './Containers/ExhibitionContainer'
-import GalleryContainer from './Containers/GalleryContainer.js'
 import ExhibitionShow from './Pages/ExhibitionShow'
 import ExhibitionEdit from './Pages/ExhibitionEdit'
 import Navbar from './Components/Navbar'
 import {connect} from 'react-redux'
+import ViewingRoom from './Components/ViewingRoom'
 import Signup from './Components/Signup.js'
 import UserLoginPage from './Pages/UserLoginPage.js'
 import GalleryLoginPage from './Pages/GalleryLoginPage.js'
 import {loginGallery, signUpGallery, startGallerySession, startUserSession, loginUser, signUpUser} from './Redux/actions'
+const HomeContainer = React.lazy(() => import('./Containers/HomeContainer'));
+const GalleryContainer = React.lazy(() => import('./Containers/GalleryContainer'));
+const ExhibitionContainer = React.lazy(() => import('./Containers/ExhibitionContainer'))
+const FavoritesContainer = React.lazy(() => import('./Containers/FavoritesContainer'))
+
 
 
 
 class App extends React.Component {
 
+  
+
   componentDidMount(){
-    
+    console.log(localStorage)
+    if(localStorage.getItem("user")){
+      this.props.setUser()
+    } if(localStorage.getItem("gallery")){
+      this.props.setGallery()
+    } else {
+      this.props.history.push("/")
+    }
   }
 
   gallerySignupHandler = (galleryObj) => {
     this.props.signupGallery(galleryObj)
-    this.props.history.push('/profile')
+    this.props.history.push('/gallery/profile')
   }
 
   galleryLoginHandler = (galleryInfo) => {
     this.props.loginGallery(galleryInfo)
-    this.props.history.push('/profile')
+    this.props.history.push('/gallery/profile')
   }
 
   userSignupHandler = (userObj) => {
@@ -53,9 +65,11 @@ class App extends React.Component {
   render() {
     return(
       <div className="App">
-        <Navbar />
+        <Navbar gallery={this.props.gallery}/>
+        <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route path='/profile' exact render={() => <GalleryContainer gallery={this.props.gallery}/>}/>
+          <Route path='/gallery/profile' exact render={() => <GalleryContainer gallery={this.props.gallery}/>}/>
+          <Route path='/user/profile' exact render={() => <FavoritesContainer user={this.props.user}/>}/>
           <Route path="/" exact render={() => <HomeContainer />} />
           <Route path='/explore' exact render={() => <ExhibitionContainer user={this.props.user}/>}/>
           <Route path='/user/login' exact render={() => <UserLoginPage userSignupHandler={this.userSignupHandler} userLoginHandler={this.userLoginHandler} setUser={this.props.setUser} user={this.props.user}
@@ -75,7 +89,14 @@ class App extends React.Component {
           component={routerProps => <ExhibitionEdit {...routerProps} />
         }
         />
+        <Route
+          exact
+          path={'/viewing_room'}
+          component={routerProps => <ViewingRoom {...routerProps} />
+        }
+        />
         </Switch>
+      </Suspense>
     </div>
     )
   }

@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {signUpGallery, startGallerySession} from '../Redux/actions'
+import { Button, Form, Input, Modal, TextArea } from 'semantic-ui-react'
+
 
 class Signup extends React.Component{
     
@@ -37,9 +39,9 @@ class Signup extends React.Component{
                  <input type="password" placeholder="password" value={this.state.password} onChange={this.handleChange} name="password"/>
                 </div>
                 <div className="inputBox">
-                    <input type="text" placeholder="gallery name" value={this.state.name} onChange={this.handleChange} name="name"/>
+                    <input type="text" placeholder="name" value={this.state.name} onChange={this.handleChange} name="name"/>
                 </div>
-                <input type="submit" name="sign-in" value="Sign Up"></input><br></br>
+                <Button>Sign up</Button><br></br>
             </form>
             </div>
 

@@ -18,8 +18,9 @@ class HomeContainer extends React.Component {
     
         return(
             
-          
-          <Segment id="home-container" placeholder clearing>
+        <div className="home-body">
+          <div className="bg-div" style={{ backgroundImage: "url(/rist.jpg)"}}> 
+          <Segment placeholder  id="home-segment">
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
               <Grid.Column verticalAlign='middle'>
@@ -41,6 +42,9 @@ class HomeContainer extends React.Component {
       
           <Divider vertical>Or</Divider>
         </Segment>
+        
+        </div>
+        </div>
         )
     }
 }

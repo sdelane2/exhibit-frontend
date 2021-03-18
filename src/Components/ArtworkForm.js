@@ -35,13 +35,14 @@ class ArtworkForm extends React.Component{
 
         this.props.createNewArtwork(newArtwork)
         this.setState({open: false})
+        e.target.reset()
     }
 
 
     render(){
         return(
             <div>
-                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="gray">add new artwork</Button>}>
+                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="gray">Add New Artwork</Button>}>
                     <Modal.Content>
                         <Form onSubmit={this.submitHandler}>
                             <Form.Field control={Input} label="Artist" type="text" name="artist" value={this.state.artist} onChange={this.changeHandler} />

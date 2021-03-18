@@ -11,8 +11,8 @@ class UserLoginPage extends React.Component {
         
         console.log(this.props)
         return(
-           
-            <Segment id="home-container" placeholder clearing>
+          <div className="bg-div" style={{ backgroundImage: "url(/basel.jpg)"}}> 
+            <Segment id="home-segment" placeholder >
               <Grid columns={2} relaxed='very' stackable>
                 <Grid.Column>
                   <Grid.Column verticalAlign='middle'>
@@ -27,7 +27,7 @@ class UserLoginPage extends React.Component {
           
               <Divider vertical>Or</Divider>
             </Segment>
-            
+            </div>
         )
     }
 }

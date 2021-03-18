@@ -1,13 +1,13 @@
 import React from 'react'
-import {Dropdown} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import { addArtworkToExhibition } from '../Redux/actions'
+import {Card, Button, Image, Dropdown, Form} from 'semantic-ui-react'
 
 class Artwork extends React.Component {
 
     favoriteClickHandler = () => {
         const newFavorite = {
-            exhibited_artwork_id: this.props.id,
+            exhibited_artwork_id: this.props.exhibited_artwork.id,
             user_id: this.props.user.id
         }
 
@@ -44,47 +44,109 @@ class Artwork extends React.Component {
         
     }
 
+    deleteFaveClickHandler = () => {
+        
+        let fave = [...this.props.faves].find(fave => fave.exhibited_artwork_id === this.props.exhibited_artwork.id)
+        this.props.deleteFaveArtwork(fave.id)
+    }
 
     render(){
+        
+        let conditional = () => { 
+            if(this.props.exhibitions.flatMap(exh => exh.exhibited_artworks.flatMap(art => art.id !== this.props.artwork.id))){
+                return this.props.exhibitions.map(exh => <option value={exh.id} key={exh.id}>{exh.title}</option>)
+            }
+        }
+
+        console.log(this.props.artwork.title)
+        console.log(this.props.faves)
+        
         
     return (
         <>
         {this.props.container ?
-        <div className="flex-item">
-            <h4>
-                {console.log(this.props.artwork.id)}
-                {this.props.artwork.title}
-            </h4>
-            <img 
-            className="index-img"
-            src={this.props.artwork.image_url}
-            alt={this.props.artwork.title}
-            />
-            <br></br>
-            <button onClick={this.favoriteClickHandler}>add artwork to favorites</button>
+            [...this.props.faves].find(fave => fave.exhibited_artwork_id === this.props.exhibited_artwork.id) ?
+            <div className="flex-item">
+            <Card color='grey' raised >
+            <Card.Content style={{height: "350px"}}>
+                
+                <Image
+                className="index-img"
+                src={this.props.artwork.image_url}
+                
+                />
+                <Card.Header><br></br>{this.props.artwork.artist}</Card.Header>
+                <Card.Description>{this.props.artwork.title}</Card.Description>
+
+            </Card.Content>
+            <Card.Content extra>
+            
+            <Button negative onClick={this.deleteFaveClickHandler} style={{width: "178px"}}>Remove Favorite Artwork</Button>
+            </Card.Content>   
+            </Card>
+            <div id="spacer">
+            
+            </div>
+            
 
         </div>
         :
         <div className="flex-item">
-            <h4>
-                {console.log(this.props.artwork)}
-                {this.props.artwork.title}
-            </h4>
-            <img 
-            className="index-img"
-            src={this.props.artwork.image_url}
-            alt={this.props.artwork.title}
-            /><br></br>
-            <button onClick={this.deleteClickHandler}>delete this artwork</button>
-            <br></br>
-            <form onSubmit={this.submitHandler}>
+            <Card color='grey' raised >
+            <Card.Content style={{height: "350px"}}>
+                
+                <Image
+                className="index-img"
+                src={this.props.artwork.image_url}
+                
+                />
+                <Card.Header><br></br>{this.props.artwork.artist}</Card.Header>
+                <Card.Description>{this.props.artwork.title}</Card.Description>
+
+            </Card.Content>
+            <Card.Content extra>
+            
+            <Button color="grey" onClick={this.favoriteClickHandler} style={{width: "178px"}}>Favorite Artwork</Button>
+            </Card.Content>   
+            </Card>
+            <div id="spacer">
+            
+            </div>
+            
+
+        </div>
+
+        :
+        <div>
+        <div className="flex-item">
+            <Card color='grey' raised >
+            <Card.Content style={{height: "350px"}}>
+                
+                <Image
+                className="index-img"
+                src={this.props.artwork.image_url}
+                
+                />
+                <Card.Header><br></br>{this.props.artwork.artist}</Card.Header>
+                <Card.Description>{this.props.artwork.title}</Card.Description>
+
+            </Card.Content>
+            <Card.Content extra>
+            <Form onSubmit={this.submitHandler}>
                 <select value={this.state.value} onChange={this.handleChange}>
                 <option value="">Select an Exhibition:</option>
-                {this.props.exhibitions.map(exh => <option value={exh.id} key={exh.id}>{exh.title}</option>)}
+                {conditional()}
                 </select>
-                <input type="submit" value="Add to show" />
-            </form>
-
+                <Button type="submit" style={{width: "178px"}}>Add to Exhibition</Button>
+            </Form>
+            <Button onClick={this.deleteClickHandler} style={{width: "178px"}}>Delete this artwork</Button>
+            </Card.Content>   
+            </Card>
+            </div>
+            <div id="spacer">
+            
+            </div>
+        
         </div>
         }
         </>
