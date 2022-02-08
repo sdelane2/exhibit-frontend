@@ -110,7 +110,6 @@ export function loginUser(userInfo) {
         .then((r) => r.json())
         .then((data) => {
             console.log("logging in user", data)
-            localStorage.removeItem("gallery")
             localStorage.setItem("token", data.jwt);
             localStorage.setItem("user", data.user.id);
             dispatch({type: LOGIN_USER, payload: data.user})
@@ -118,26 +117,26 @@ export function loginUser(userInfo) {
     }
 }
 
-export function loginGallery(galleryInfo) {
-    return function (dispatch) {
-      fetch("https://floating-forest-25639.herokuapp.com/gallery/login.json", {
-        method: "POST",
-        headers: {
-          accepts: "application/json",
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ gallery: galleryInfo }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-        console.log("logging in gallery", data)
-        localStorage.removeItem("user")
-        localStorage.setItem("token", data.jwt);
-        localStorage.setItem("gallery", data.gallery.id);
-          dispatch({type: LOGIN_GALLERY, payload: data.gallery})
-      })
-    }
-}
+// export function loginGallery(galleryInfo) {
+//     return function (dispatch) {
+//       fetch("https://floating-forest-25639.herokuapp.com/gallery/login.json", {
+//         method: "POST",
+//         headers: {
+//           accepts: "application/json",
+//           "content-type": "application/json",
+//         },
+//         body: JSON.stringify({ gallery: galleryInfo }),
+//       })
+//         .then((r) => r.json())
+//         .then((data) => {
+//         console.log("logging in gallery", data)
+//         localStorage.removeItem("user")
+//         localStorage.setItem("token", data.jwt);
+//         localStorage.setItem("gallery", data.gallery.id);
+//           dispatch({type: LOGIN_GALLERY, payload: data.gallery})
+//       })
+//     }
+// }
 
 
 

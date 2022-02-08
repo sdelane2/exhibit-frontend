@@ -11,7 +11,7 @@ class GalleryContainer extends React.Component{
     
     componentDidMount(){
         
-        this.props.getGalleryExhibitions(parseInt(localStorage.gallery))
+        this.props.getGalleryExhibitions(parseInt(localStorage.user))
         console.log(localStorage)
         this.setState({page: this.props.page === true})
 
@@ -33,8 +33,8 @@ class GalleryContainer extends React.Component{
         return(
             <div >
                 <br></br>
-                <Header as="h2">{this.props.gallery.name} gallery</Header>
-                <ExhibitionForm gallery={this.props.gallery} />
+                <Header as="h2">{this.props.user.name} gallery</Header>
+                <ExhibitionForm gallery={this.props.user} />
                 <br></br><br></br>
                 <Container>
                 
@@ -53,7 +53,7 @@ class GalleryContainer extends React.Component{
                 <Container>
                 
 
-                    <GalleryArtworkContainer gallery={this.props.gallery} exhibitions={this.props.myExhibitions}/>
+                    <GalleryArtworkContainer gallery={this.props.user} exhibitions={this.props.myExhibitions}/>
                 
                 </Container>
                 </Suspense>
@@ -64,7 +64,7 @@ class GalleryContainer extends React.Component{
 
 const msp = state => {
     return {
-    gallery: state.gallery,
+    gallery: state.user,
     myExhibitions: state.galleryExhibitions,
     page: state.loadPage
     }

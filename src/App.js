@@ -28,22 +28,20 @@ class App extends React.Component {
     console.log(localStorage)
     if(localStorage.getItem("user")){
       this.props.setUser()
-    } if(localStorage.getItem("gallery")){
-      this.props.setGallery()
     } else {
       this.props.history.push("/")
     }
   }
 
-  gallerySignupHandler = (galleryObj) => {
-    this.props.signupGallery(galleryObj)
-    this.props.history.push('/gallery/profile')
-  }
+  // gallerySignupHandler = (galleryObj) => {
+  //   this.props.signupGallery(galleryObj)
+  //   this.props.history.push('/gallery/profile')
+  // }
 
-  galleryLoginHandler = (galleryInfo) => {
-    this.props.loginGallery(galleryInfo)
-    this.props.history.push('/gallery/profile')
-  }
+  // galleryLoginHandler = (galleryInfo) => {
+  //   this.props.loginGallery(galleryInfo)
+  //   this.props.history.push('/gallery/profile')
+  // }
 
   userSignupHandler = (userObj) => {
     this.props.signupUser(userObj)
@@ -65,10 +63,10 @@ class App extends React.Component {
   render() {
     return(
       <div className="App">
-        <Navbar gallery={this.props.gallery}/>
+        <Navbar gallery={this.props.user}/>
         <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route path='/gallery/profile' exact render={() => <GalleryContainer gallery={this.props.gallery}/>}/>
+          <Route path='/gallery/profile' exact render={() => <GalleryContainer gallery={this.props.user}/>}/>
           <Route path='/user/profile' exact render={() => <FavoritesContainer user={this.props.user}/>}/>
           <Route path="/" exact render={() => <HomeContainer />} />
           <Route path='/explore' exact render={() => <ExhibitionContainer user={this.props.user}/>}/>
@@ -105,7 +103,6 @@ class App extends React.Component {
 
 const msp = state => {
   return {
-    gallery: state.gallery,
     user: state.user
   }
 }

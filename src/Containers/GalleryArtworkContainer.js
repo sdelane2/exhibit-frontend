@@ -16,7 +16,7 @@ class GalleryArtworkContainer extends React.Component{
 
     componentDidMount(){
         if(localStorage.token){
-        this.props.getArtworks(parseInt(localStorage.gallery))
+        this.props.getArtworks(parseInt(localStorage.user))
         this.setState({isLoading: false})
     }}
 
@@ -57,7 +57,7 @@ class GalleryArtworkContainer extends React.Component{
 
 const msp = state => {
     return {
-    gallery: state.gallery,
+    gallery: state.user,
     myArtworks: state.galleryArtworks
     }
 }

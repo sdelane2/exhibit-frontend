@@ -30,7 +30,7 @@ class ArtworkForm extends React.Component{
             medium: this.state.medium,
             description: this.state.description,
             image_url: this.state.image_url,
-            gallery_id: this.props.gallery.id
+            gallery_id: this.props.user.id
         }
 
         this.props.createNewArtwork(newArtwork)
@@ -65,7 +65,7 @@ class ArtworkForm extends React.Component{
 
 const msp = state => {
     return {
-    gallery: state.gallery,
+    gallery: state.user,
     }
 }
 

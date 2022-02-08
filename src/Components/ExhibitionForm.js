@@ -38,7 +38,7 @@ class ExhibitionForm extends React.Component{
             title: this.state.title,
             description: this.state.description,
             published: this.state.published,
-            gallery_id: this.props.gallery.id
+            gallery_id: this.props.user.id
         }
 
         this.props.createNewExhibition(newExhibition)
@@ -82,7 +82,7 @@ class ExhibitionForm extends React.Component{
 
 const msp = state => {
     return {
-    gallery: state.gallery,
+    gallery: state.user,
     }
 }
 
