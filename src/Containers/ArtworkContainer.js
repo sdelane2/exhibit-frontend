@@ -8,7 +8,7 @@ class ArtworkContainer extends React.Component {
     }
     
  componentDidMount(){
-        fetch("https://floating-forest-25639.herokuapp.com/artworks.json")
+        fetch("https://floating-forest-25639.herokuapp.com/gallery_artworks.json")
         .then(r => r.json())
         .then(data => {
           this.setState({artworks: data})
