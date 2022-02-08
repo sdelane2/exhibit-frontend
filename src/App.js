@@ -11,7 +11,7 @@ import ViewingRoom from './Components/ViewingRoom'
 import Signup from './Components/Signup.js'
 import UserLoginPage from './Pages/UserLoginPage.js'
 import GalleryLoginPage from './Pages/GalleryLoginPage.js'
-import {loginGallery, signUpGallery, startGallerySession, startUserSession, loginUser, signUpUser} from './Redux/actions'
+import {startUserSession, loginUser, signUpUser} from './Redux/actions'
 const HomeContainer = React.lazy(() => import('./Containers/HomeContainer'));
 const GalleryContainer = React.lazy(() => import('./Containers/GalleryContainer'));
 const ExhibitionContainer = React.lazy(() => import('./Containers/ExhibitionContainer'))
@@ -72,7 +72,7 @@ class App extends React.Component {
           <Route path='/explore' exact render={() => <ExhibitionContainer user={this.props.user}/>}/>
           <Route path='/user/login' exact render={() => <UserLoginPage userSignupHandler={this.userSignupHandler} userLoginHandler={this.userLoginHandler} setUser={this.props.setUser} user={this.props.user}
           />} />
-          <Route path='/gallery/login' exact render={() => <GalleryLoginPage gallerySignupHandler={this.gallerySignupHandler} galleryLoginHandler={this.galleryLoginHandler} setGallery={this.props.setGallery}
+          <Route path='/gallery/login' exact render={() => <GalleryLoginPage setGallery={this.props.setUser}
           />} />
           
           <Route
@@ -109,9 +109,8 @@ const msp = state => {
 
 const mdp = dispatch => {
   return {
-    loginGallery: (galleryInfo) => dispatch(loginGallery(galleryInfo)),
-    signupGallery: (galleryObj) => dispatch(signUpGallery(galleryObj)),
-    setGallery: () => dispatch(startGallerySession()),
+    
+    
     loginUser: (userInfo) => dispatch(loginUser(userInfo)),
     signupUser: (userObj) => dispatch(signUpUser(userObj)),
     setUser: () => dispatch(startUserSession())
