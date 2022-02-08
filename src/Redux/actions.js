@@ -31,7 +31,7 @@ import {
 
 export function signUpGallery(galleryObj){
     return function(dispatch){
-        fetch('http://localhost:3000/galleries', {
+        fetch('https://floating-forest-25639.herokuapp.com/galleries.json', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -49,7 +49,7 @@ export function signUpGallery(galleryObj){
 export function startGallerySession(){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/profile', {
+        fetch('https://floating-forest-25639.herokuapp.com/profile.json', {
         method: "GET",
         headers: {Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export function startGallerySession(){
 export function startUserSession(){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/explore', {
+        fetch('https://floating-forest-25639.herokuapp.com/explore.json', {
         method: "GET",
         headers: {Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export function startUserSession(){
 
 export function signUpUser(userObj){
     return function(dispatch){
-        fetch('http://localhost:3000/users', {
+        fetch('https://floating-forest-25639.herokuapp.com/users.json', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -99,7 +99,7 @@ export function signUpUser(userObj){
 
 export function loginUser(userInfo) {
     return function (dispatch) {
-      fetch("http://localhost:3000/user/login", {
+      fetch("https://floating-forest-25639.herokuapp.com/user/login.json", {
         method: "POST",
         headers: {
           accepts: "application/json",
@@ -120,7 +120,7 @@ export function loginUser(userInfo) {
 
 export function loginGallery(galleryInfo) {
     return function (dispatch) {
-      fetch("http://localhost:3000/gallery/login", {
+      fetch("https://floating-forest-25639.herokuapp.com/gallery/login.json", {
         method: "POST",
         headers: {
           accepts: "application/json",
@@ -144,7 +144,7 @@ export function loginGallery(galleryInfo) {
 export function getExhibitions(galleryId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/exhibitions', {
+        fetch('https://floating-forest-25639.herokuapp.com/exhibitions.json', {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })
@@ -161,7 +161,7 @@ export function userExhibitions(){
     
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/exhibitions', {
+        fetch('https://floating-forest-25639.herokuapp.com/exhibitions.json', {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })
@@ -178,7 +178,7 @@ export function userExhibitions(){
 export function getExhibitedArtworks(exhibitionId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/exhibited_artworks`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/exhibited_artworks.json`, {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })
@@ -195,7 +195,7 @@ export function getExhibitedArtworks(exhibitionId){
 export function getUserExhibitedArtworks(exhibitionId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/exhibited_artworks`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/exhibited_artworks.json`, {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })
@@ -212,7 +212,7 @@ export function getUserExhibitedArtworks(exhibitionId){
 export function addArtworkToExhibition(artworkObj){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/exhibited_artworks', {
+        fetch('https://floating-forest-25639.herokuapp.com/exhibited_artworks.json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -234,7 +234,7 @@ export function addArtworkToExhibition(artworkObj){
 export function getGalleryArtworks(galleryId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/gallery_artworks', {
+        fetch('https://floating-forest-25639.herokuapp.com/gallery_artworks.json', {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })
@@ -251,7 +251,7 @@ export function getGalleryArtworks(galleryId){
 export function createExhibition(exhibitionObj){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/exhibitions', {
+        fetch('https://floating-forest-25639.herokuapp.com/exhibitions.json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -270,7 +270,7 @@ export function createExhibition(exhibitionObj){
 export function deleteFromExhibitions(id){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/exhibitions/${id}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/exhibitions/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type' : 'application/json',
@@ -284,7 +284,7 @@ export function deleteFromExhibitions(id){
 export function createArtwork(artworkObj){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/gallery_artworks', {
+        fetch('https://floating-forest-25639.herokuapp.com/gallery_artworks.json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -303,7 +303,7 @@ export function createArtwork(artworkObj){
 export function deleteFromArtworks(id){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/gallery_artworks/${id}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/gallery_artworks/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type' : 'application/json',
@@ -317,7 +317,7 @@ export function deleteFromArtworks(id){
 export function addExhibitionToFavorites(exhibitionObj){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/favorite_exhibitions', {
+        fetch('https://floating-forest-25639.herokuapp.com/favorite_exhibitions.json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -336,7 +336,7 @@ export function addExhibitionToFavorites(exhibitionObj){
 export function addArtworkToFavorites(artworkObj){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/favorite_artworks', {
+        fetch('https://floating-forest-25639.herokuapp.com/favorite_artworks.json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -355,7 +355,7 @@ export function addArtworkToFavorites(artworkObj){
 export function updateExhibition(exhibitionId, updateObj){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/exhibitions/${exhibitionId}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/exhibitions/${exhibitionId}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",
@@ -373,7 +373,7 @@ export function updateExhibition(exhibitionId, updateObj){
 export function getExhibition(exhibitionId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/exhibitions/${exhibitionId}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/exhibitions/${exhibitionId}`, {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })
@@ -388,7 +388,7 @@ export function getExhibition(exhibitionId){
 export function getFavoriteArtworks(userId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/favorite_artworks', {
+        fetch('https://floating-forest-25639.herokuapp.com/favorite_artworks.json', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -406,7 +406,7 @@ export function getFavoriteArtworks(userId){
 export function getFavoriteExhibitions(userId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/favorite_exhibitions', {
+        fetch('https://floating-forest-25639.herokuapp.com/favorite_exhibitions.json', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -424,7 +424,7 @@ export function getFavoriteExhibitions(userId){
 export function deleteFavoriteExhibition(id){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/favorite_exhibitions/${id}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/favorite_exhibitions/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type' : 'application/json',
@@ -438,7 +438,7 @@ export function deleteFavoriteExhibition(id){
 export function deleteExhibitedArtwork(id){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/exhibited_artworks/${id}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/exhibited_artworks/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type' : 'application/json',
@@ -452,7 +452,7 @@ export function deleteExhibitedArtwork(id){
 export function deleteFavoriteArtwork(id){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch(`http://localhost:3000/favorite_artworks/${id}`, {
+        fetch(`https://floating-forest-25639.herokuapp.com/favorite_artworks/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type' : 'application/json',
