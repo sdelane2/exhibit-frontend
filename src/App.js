@@ -16,14 +16,7 @@ const HomeContainer = React.lazy(() => import('./Containers/HomeContainer'));
 const GalleryContainer = React.lazy(() => import('./Containers/GalleryContainer'));
 const ExhibitionContainer = React.lazy(() => import('./Containers/ExhibitionContainer'))
 const FavoritesContainer = React.lazy(() => import('./Containers/FavoritesContainer'))
-
-
-
-
 class App extends React.Component {
-
-  
-
   componentDidMount(){
     console.log(localStorage)
     if(localStorage.getItem("user")){
@@ -32,34 +25,16 @@ class App extends React.Component {
       this.props.history.push("/")
     }
   }
-
-  // gallerySignupHandler = (galleryObj) => {
-  //   this.props.signupGallery(galleryObj)
-  //   this.props.history.push('/gallery/profile')
-  // }
-
-  // galleryLoginHandler = (galleryInfo) => {
-  //   this.props.loginGallery(galleryInfo)
-  //   this.props.history.push('/gallery/profile')
-  // }
-
   userSignupHandler = (userObj) => {
     this.props.signupUser(userObj)
     this.props.history.push('/explore')
-
-    
   }
   
   userLoginHandler = (userInfo)=>{
     this.props.loginUser(userInfo)
     this.props.history.push('/explore')
-    console.log(this.props.user)
-
-    
+    console.log(this.props.user)    
   }
-
-
-
   render() {
     return(
       <div className="App">
@@ -70,47 +45,24 @@ class App extends React.Component {
           <Route path='/user/profile' exact render={() => <FavoritesContainer user={this.props.user}/>}/>
           <Route path="/" exact render={() => <HomeContainer />} />
           <Route path='/explore' exact render={() => <ExhibitionContainer user={this.props.user}/>}/>
-          <Route path='/user/login' exact render={() => <UserLoginPage userSignupHandler={this.userSignupHandler} userLoginHandler={this.userLoginHandler} setUser={this.props.setUser} user={this.props.user}
-          />} />
-          <Route path='/gallery/login' exact render={() => <GalleryLoginPage setGallery={this.props.setUser}
-          />} />
-          
-          <Route
-          exact
-          path={'/exhibitions/:id'}
-          component={routerProps => <ExhibitionShow {...routerProps} user={this.props.user} />
-        }
-        />
-        <Route
-          exact
-          path={'/exhibitions/edit/:id'}
-          component={routerProps => <ExhibitionEdit {...routerProps} />
-        }
-        />
-        <Route
-          exact
-          path={'/viewing_room'}
-          component={routerProps => <ViewingRoom {...routerProps} />
-        }
-        />
+          <Route path='/user/login' exact render={() => <UserLoginPage userSignupHandler={this.userSignupHandler} userLoginHandler={this.userLoginHandler} setUser={this.props.setUser} user={this.props.user}/>} />
+          <Route path='/gallery/login' exact render={() => <GalleryLoginPage setGallery={this.props.setUser}/>} />
+          <Route exact path={'/exhibitions/:id'} component={routerProps => <ExhibitionShow {...routerProps} user={this.props.user} />}/>
+          <Route exact path={'/exhibitions/edit/:id'} component={routerProps => <ExhibitionEdit {...routerProps} />}/>
+          <Route exact path={'/viewing_room'} component={routerProps => <ViewingRoom {...routerProps} />}/>
         </Switch>
       </Suspense>
     </div>
     )
   }
-
 }
-
 const msp = state => {
   return {
     user: state.user
   }
 }
-
 const mdp = dispatch => {
-  return {
-    
-    
+  return { 
     loginUser: (userInfo) => dispatch(loginUser(userInfo)),
     signupUser: (userObj) => dispatch(signUpUser(userObj)),
     setUser: () => dispatch(startUserSession())

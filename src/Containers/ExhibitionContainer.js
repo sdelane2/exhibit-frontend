@@ -14,15 +14,11 @@ class ExhibitionContainer extends React.Component {
         console.log(this.state)
         this.props.getExhibitions()
         this.props.favoriteExhibitions(this.props.user.id)
-
     }
-
-
 
     exhibitionFunction = () => {
         let publishedExhibitions = this.props.exhibitions.filter(exhibition => exhibition.published === true )
         return publishedExhibitions.map(exhibition =>  <ExhibitionThumbnail exhibition={exhibition} container={true}  image={exhibition.image} addFavoriteExhibition={this.props.addFavoriteExhibition} user={this.props.user} faves={this.props.faves} deleteFave={this.props.deleteFave}/>)
-
     }
 
     render() {
@@ -43,7 +39,6 @@ const msp = state => {
     return {
     exhibitions: state.userExhibitions,
     faves: state.favoriteExhibitions,
-
     }
 }
 

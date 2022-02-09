@@ -166,8 +166,6 @@ export function userExhibitions(){
           })
         .then(r => r.json())
         .then(data => {
-            console.log(data)
-            console.log(localStorage)
             dispatch({type: USER_EXHIBITIONS, payload: data})
             dispatch({type: PAGE_LOADING_DONE, payload: true})
         })

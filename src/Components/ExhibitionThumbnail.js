@@ -6,59 +6,36 @@ import LazyLoad from 'react-lazyload';
 
 
 class exhibitionThumbnail extends React.Component {
-
-    
-
     deleteClickHandler = () => {
         this.props.deleteExhibition(this.props.exhibition.id)
     }
-
     favoriteClickHandler = () => {
         const newFavorite = {
             exhibition_id: this.props.exhibition.id,
             user_id: this.props.user.id
         }
-
         this.props.addFavoriteExhibition(newFavorite)
-
     }
-    
     deleteFaveClickHandler = () => {
-        
         let fave = [...this.props.faves].find(fave => fave.exhibition_id === this.props.exhibition.id)
         this.props.deleteFave(fave.id)
     }
-
-
     publishClickHandler = () => {
         const exhibitionId = this.props.exhibition.id
         const updateObj = {
-            published: true
-        
+            published: true        
         }
-
-
         this.props.updateExh(exhibitionId, updateObj)
     }
-
     unpublishClickHandler = () => {
         const exhibitionId = this.props.exhibition.id
         const updateObj = {
-            published: false
-        
+            published: false 
         }
-
-
         this.props.updateExh(exhibitionId, updateObj)
-
     }
-    
     render(){
-
         console.log(this.props.faves)
-
-        
-        
         const extra = (
             <img 
                 className="index-img"
