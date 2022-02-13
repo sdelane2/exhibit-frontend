@@ -19,7 +19,7 @@ class HomeContainer extends React.Component {
         return(
             
         <div className="home-body">
-          <div className="bg-div" style={{ backgroundImage: "url(/rist.jpg)"}}> 
+          <div  > 
           <Segment placeholder  id="home-segment">
           <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>
@@ -28,7 +28,7 @@ class HomeContainer extends React.Component {
               <Icon name="user circle" size="huge" />
               
               </Link>
-              <h2>User</h2>
+              
             </Grid.Column>
             </Grid.Column>
       
@@ -36,11 +36,11 @@ class HomeContainer extends React.Component {
             <Link to={{ pathname: '/gallery/login'}} >
                 <Icon name="paint brush" size="huge" />
                 </Link>
-                <h2>Gallery</h2> 
+                
             </Grid.Column>
           </Grid>
       
-          <Divider vertical>Or</Divider>
+          <Divider vertical></Divider>
         </Segment>
         
         </div>
