@@ -47,67 +47,34 @@ class exhibitionThumbnail extends React.Component {
     return (
         <>
         {this.props.container ?
-            [...this.props.faves].find(fave => fave.exhibition_id === this.props.exhibition.id) ?
             <div>
-            <Card color="grey" raised>
-        
-        <Card.Content>
-            <Link to={{ pathname: `/exhibitions/${this.props.exhibition.id}`, 
-                state: {
-                    title: this.props.exhibition.title,
-                    description: this.props.exhibition.description
-                } }}>
-            <Image
-            className="index-img"
-            src={this.props.image}
-            
-            />
-            </Link>
-            
-            <Card.Header><br></br>{this.props.exhibition.title}</Card.Header>
-        </Card.Content>
-        <Card.Content extra>
-            <Button negative onClick={this.deleteFaveClickHandler}>
-            Remove Favorite Exhibition
-            </Button>
-        </Card.Content>   
-        </Card>
-        <div id="spacer-exhibitions">
-            
-        </div>
-        </div>
-            :
-            <div>
-            <Card color="grey" raised>
-            
-            <Card.Content>
-                <Link to={{ pathname: `/exhibitions/${this.props.exhibition.id}`, 
-                state: {
-                    title: this.props.exhibition.title,
-                    description: this.props.exhibition.description,
-                    published: this.props.exhibition.published
-                } }}>
-                <Image
-                className="index-img"
-                src={this.props.image}
-                
-                />
-                </Link>
-                
-                <Card.Header><br></br>{this.props.exhibition.title}</Card.Header>
-            </Card.Content>
-            <Card.Content extra>
-                <Button color="grey" onClick={this.favoriteClickHandler}>
-                Favorite Exhibition
-                </Button>
-            </Card.Content>   
-            </Card>
+                <Card color="grey" raised>
+                    <Card.Content>
+                        <Link to={{ pathname: `/exhibitions/${this.props.exhibition.id}`, 
+                            state: {
+                                title: this.props.exhibition.title,
+                                description: this.props.exhibition.description
+                            } }}>
+                            <Image className="index-img" src={this.props.image}/>
+                        </Link>
+                        <Card.Header><br></br>{this.props.exhibition.title}</Card.Header>
+                    </Card.Content>
+                    {Object.keys(this.props.user).length !== 0 &&
+                        ([...this.props.faves].find(fave => fave.exhibition_id === this.props.exhibition.id) ? 
+                            <Card.Content extra>
+                                <Button negative onClick={this.deleteFaveClickHandler}> Remove Favorite Exhibition </Button>
+                            </Card.Content>
+                            :
+                            <Card.Content extra>
+                                <Button color="grey" onClick={this.favoriteClickHandler}> Favorite Exhibition </Button>
+                            </Card.Content>   
+                        )
+                    }
+                </Card>
             <div id="spacer-exhibitions">
             
             </div>
             </div>
-            
-        
         :
         <>
         {console.log(this.props.exhibitions)}

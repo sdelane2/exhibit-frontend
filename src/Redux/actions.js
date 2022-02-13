@@ -158,11 +158,11 @@ export function getExhibitions(galleryId){
 
 export function userExhibitions(){
     
-    const token = localStorage.getItem('token')
+    
     return function(dispatch){
         fetch('https://floating-forest-25639.herokuapp.com/exhibitions.json', {
             method: "GET",
-            headers: {Authorization: `Bearer ${token}`},
+            
           })
         .then(r => r.json())
         .then(data => {

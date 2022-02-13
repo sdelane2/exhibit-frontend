@@ -1,15 +1,36 @@
 
-
+body{
+  font-family: 'Heebo', sans-serif;
+  color: black;
+}
 .App {
   text-align: center;
   font-family: 'Heebo', sans-serif;
 }
+h1{
+  margin: 0;
 
+}
+Link{
+  text-decoration: none;
+  color: black;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+.exhibition-wrapper{
+  margin-left: 4em;
+  margin-right: 4em;
+  font-family: 'Heebo', sans-serif;
+  
+}
+.exhibition-container{
+  width: 600px;
+  margin: auto;
+  
+}
 
 .App-header {
   background-color: #282c34;
@@ -92,6 +113,11 @@
   /* box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75) */
 }
 
+
+a{
+  text-decoration: none;
+}
+
 .index-img {
   
   object-fit: fill;
@@ -141,3 +167,19 @@
   box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
 } */
 
+.exhibition-card{
+  flex: 50%;
+  display: block;
+}
+.title-card{
+  margin-top: auto;
+  margin-bottom: auto;
+  flex: 50%;
+
+}
+.exhibition-parent{
+  padding-top: 2em;
+  padding-bottom: 2em;
+  display: flex;
+  border-top: 3px solid black;
+}
