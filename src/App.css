@@ -172,7 +172,7 @@ a{
 img{
   transition: all .3s;
 }
-img:hover{
+.index-img:hover{
   transform: scale(1.1);
 }
 .exhibition-card{
@@ -210,9 +210,13 @@ header{
   height: 68px;
   top: 0;
   z-index: 100;
-  background-color: white;
+  /* background-color: white; */
   position: fixed;
   justify-content: space-between;
+  transition: all .2s
+}
+header:hover{
+  background-color: white;
 }
 .navbar{
   position: relative;
@@ -255,7 +259,76 @@ header{
   transition: all 0.3s;
   font: normal;
 }
+
 .navbar-link:hover{
-  border-bottom: 2px solid blue;
+  
+  border-bottom: 2px solid blue ;
   cursor: pointer;
+}
+.hero{
+  background-image: url("./assets/images/hero.jpeg");
+  background-size: cover;
+  background-position: center;
+  padding: 250px 0 200px 0;
+  height: 100vh;
+}
+.hero > h1 {
+  font-size: 64px;
+  font-weight: 700;
+  
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  line-height: 1.2;
+}
+.three-artworks{
+  display: flex;
+}
+.three-artworks > div > img{
+  
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+  
+}
+/* .img1 { flex: .9961; }
+.img2 { flex: .75; }
+.img3 { flex: 0.955; } */
+.quotes-container{
+  display: flex;
+}
+.quotes{
+  display: flex;
+  flex: 1;
+  padding: 40px 120px 40px 120px;
+  text-align: center;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+}
+.quotes:first-child{
+  background-color: blue;
+  color: white;
+}
+.button-div{
+  display: flex;
+  justify-content: center;
+}
+a.button{
+  display: inline-block;
+  margin: 20px 0 0 0;
+  border: 2px solid blue;
+  background-color: blue;
+  border-radius: 40px;
+  padding: 10px 20px 10px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  transition: all 0.2s;
+  border: 2px transparent;
+}
+a.button:hover{
+  border: none;
+  background-color: white;
+  color: blue;
 }
