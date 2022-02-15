@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 
 
 
+
 class HomeContainer extends React.Component {
 
   
@@ -17,34 +18,23 @@ class HomeContainer extends React.Component {
         console.log(this.props)
     
         return(
-            
-        <div className="home-body">
-          <div className="bg-div" style={{ backgroundImage: "url(/rist.jpg)"}}> 
-          <Segment placeholder  id="home-segment">
-          <Grid columns={2} relaxed='very' stackable>
-            <Grid.Column>
-              <Grid.Column verticalAlign='middle'>
-              <Link to={{ pathname: '/user/login'}} >
-              <Icon name="user circle" size="huge" />
-              
-              </Link>
-              <h2>User</h2>
-            </Grid.Column>
-            </Grid.Column>
-      
-            <Grid.Column verticalAlign='middle'>
-            <Link to={{ pathname: '/gallery/login'}} >
-                <Icon name="paint brush" size="huge" />
-                </Link>
-                <h2>Gallery</h2> 
-            </Grid.Column>
-          </Grid>
-      
-          <Divider vertical>Or</Divider>
-        </Segment>
+        <>
+        <section className="hero" >
+          <h1>The finest artworks at your fingertips</h1>
+          <div className="button-div">
+            <a href="#" class="button">Find out more</a>
+          </div>
+        </section>
         
-        </div>
-        </div>
+        <section className="quotes-container">
+          <div className="quotes">
+            <h2>This app rocks</h2>
+          </div>
+          <div className="quotes">
+            <h2>This app rocks</h2>
+          </div>
+        </section>
+        </>
         )
     }
 }
