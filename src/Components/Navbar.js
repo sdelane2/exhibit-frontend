@@ -21,7 +21,7 @@ function Navbar(props) {
                                 
                                 </div>
                                 <div className="center">
-                                        <h1>exhibit</h1>
+                                        <h1><Link style={{color: 'black'}} to='/'>exhibit</Link></h1>
                                 </div>
                                 <div className="navbar-right">
                                         <h2 className="navbar-link"><Link style={{color: 'black'}} to='/user/login'>login</Link></h2>
