@@ -293,17 +293,7 @@ header:hover{
 .quotes-container{
   display: flex;
 }
-@media (max-width: 767px) {
-  .quotes-container{
-    flex-direction: column;
-  }
-  .navbar-left{
-    display: none;
-  }
-  .navbar-right{
-    display: none;
-  }
-}
+
 .quotes{
   display: flex;
   flex: 1;
@@ -339,4 +329,25 @@ a.button:hover{
   border: none;
   background-color: white;
   color: blue;
+}
+
+@media (max-width: 767px) {
+  .quotes-container{
+    flex-direction: column;
+  }
+  .navbar-left{
+    display: none;
+  }
+  .navbar-right{
+    display: none;
+  }
+  header{
+    background-color: white;
+  }
+  .hero > h1{
+    font-size: 3em;
+  }
+  .center > h1 > a{
+    font-size: 2rem;
+  }
 }
