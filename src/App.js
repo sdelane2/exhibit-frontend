@@ -1,4 +1,5 @@
 import './App.css';
+import './svbstrate.css';
 import "./fonts/Heebo-Light.ttf";
 import React, {Suspense} from 'react'
 import ArtworkContainer from './Containers/ArtworkContainer'

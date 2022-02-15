@@ -224,10 +224,7 @@ header:hover{
   margin-right: 1.5em;
   margin-left: 1.5em;
   
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  
 }
 .center{
   justify-content: center;

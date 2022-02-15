@@ -14,7 +14,7 @@ function Navbar(props) {
 
         return(
                 <header>
-                        <div className="navbar">
+                        <div className="navbar w f aic jcb">
                                 <div className="navbar-left">
                                         <h2 className="navbar-link"><Link style={{color: 'black'}} to='/explore'>exhibitions</Link></h2>
                                         <h2 className="navbar-link"><Link style={{color: 'black'}} to='/explore'>artworks</Link></h2>
