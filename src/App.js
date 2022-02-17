@@ -13,6 +13,7 @@ import Signup from './Components/Signup.js'
 import UserLoginPage from './Pages/UserLoginPage.js'
 import GalleryLoginPage from './Pages/GalleryLoginPage.js'
 import {startUserSession, loginUser, signUpUser} from './Redux/actions'
+import LoginPage from './Components/LoginPage';
 const HomeContainer = React.lazy(() => import('./Containers/HomeContainer'));
 const GalleryContainer = React.lazy(() => import('./Containers/GalleryContainer'));
 const ExhibitionContainer = React.lazy(() => import('./Containers/ExhibitionContainer'))
@@ -46,8 +47,8 @@ class App extends React.Component {
           <Route path='/user/profile' exact render={() => <FavoritesContainer user={this.props.user}/>}/>
           <Route path="/" exact render={() => <HomeContainer />} />
           <Route path='/explore' exact render={() => <ExhibitionContainer user={this.props.user}/>}/>
-          <Route path='/user/login' exact render={() => <UserLoginPage userSignupHandler={this.userSignupHandler} userLoginHandler={this.userLoginHandler} setUser={this.props.setUser} user={this.props.user}/>} />
-          <Route path='/gallery/login' exact render={() => <GalleryLoginPage setGallery={this.props.setUser}/>} />
+          <Route path='/user/login' exact render={() => <LoginPage userSignupHandler={this.userSignupHandler} userLoginHandler={this.userLoginHandler} setUser={this.props.setUser} user={this.props.user}/>} />
+          <Route path='/gallery/login' exact render={() => <LoginPage setGallery={this.props.setUser}/>} />
           <Route exact path={'/exhibitions/:id'} component={routerProps => <ExhibitionShow {...routerProps} user={this.props.user} />}/>
           <Route exact path={'/exhibitions/edit/:id'} component={routerProps => <ExhibitionEdit {...routerProps} />}/>
           <Route exact path={'/viewing_room'} component={routerProps => <ViewingRoom {...routerProps} />}/>

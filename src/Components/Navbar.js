@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Link } from 'react-router-dom'
+import LoginModal from './LoginPage'
 
 
 function Navbar(props) {
+        const [show, setShow] = useState(false)
 
         // state = {
         //         activeItem: ''
@@ -13,6 +15,7 @@ function Navbar(props) {
         
 
         return(
+                <>
                 <header>
                         <div className="navbar w f aic jcb">
                                 <div className="navbar-left">
@@ -31,7 +34,7 @@ function Navbar(props) {
                         </div>
 
                 </header>
-                
+                </>
         )
 }
 

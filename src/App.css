@@ -1,4 +1,6 @@
 
+
+
 * {  box-sizing: border-box;}
 
 body{
@@ -169,7 +171,7 @@ a{
   background: rgba(5, 5, 5, 0.068);
   box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
 } */
-img{
+.exhibition-card > img{
   transition: all .3s;
 }
 .index-img:hover{
@@ -303,6 +305,15 @@ header:hover{
   .navbar-right{
     display: none;
   }
+}
+.login-modal{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  max-width: 100em;
+  background-color: rgba(0, 0, 0, .5);
 }
 .quotes{
   display: flex;
