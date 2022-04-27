@@ -231,7 +231,7 @@ export function addArtworkToExhibition(artworkObj){
 export function getGalleryArtworks(galleryId){
     const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('https://floating-forest-25639.herokuapp.com/gallery_artworks.json', {
+        fetch('https://floating-forest-25639.herokuapp.com/artworks.json', {
             method: "GET",
             headers: {Authorization: `Bearer ${token}`},
           })

@@ -1,14 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import './LoginPage.css'
 import whiteread from '../assets/images/whiteread-crop.jpeg'
 
 function LoginPage(props) {
 
+    const [choreDesc, setChoreDesc] = useState();
+    const [name, setName] = useState();
+    const [date, setDate] = useState();
+    const handleSubmit= (e) => {
+      addChoreLog([choreDesc, name, date])
+      e.preventDefault();
+    }
 
-   
-   
-
+    const [loginForm, setLoginForm] = useState({
+        username: "",
+        password: ""
+    })
     return(
         <div>
             <div className='login-container f jcc w'>
@@ -21,7 +29,7 @@ function LoginPage(props) {
                             <h1 className="mb025">Log In</h1>
                             <form className="m0">
                                 <div className="login-email w mb05">
-                                    <input className="input-field w" type="username" placeholder="Username" required>
+                                    <input className="input-field w" type="username" placeholder="Username" value={loginForm.username} onChange={e => setLoginForm(e.target.value)} required>
                                     </input>
                                 </div>
                                 <div className="login-password w mb05">

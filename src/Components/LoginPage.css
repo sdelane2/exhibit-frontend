@@ -5,11 +5,6 @@
     width: 50%;
     min-height: 70vh;
 }
-@media(max-width: 767px){
-    .login-image-half{
-        display: none;
-    }
-}
 .login-image-half > img{
     max-width: 100%;
     object-fit: cover;
@@ -57,6 +52,8 @@ input{
     background-color: white;
     color: blue;
 }
-footer{
-    height: 429px;
+@media(max-width: 767px){
+    .login-image-half{
+        display: none;
+    }
 }

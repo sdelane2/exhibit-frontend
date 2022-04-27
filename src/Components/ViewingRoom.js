@@ -15,7 +15,7 @@ class ViewingRoom extends React.Component {
                 </Header>
                 <div>
                 <Carousel renderPagination={({}) => {return (<div></div>) }} className="exhibit-gallery-carousel">
-                    {this.props.location.state.artworks.map(artwork => <div key={artwork.id}><img className="carousel-img" src={artwork.gallery_artwork.image_url}/></div>)}
+                    {this.props.location.state.artworks.map(artwork => <div key={artwork.id}><img className="carousel-img" src={artwork.artwork.image_url}/></div>)}
                 </Carousel>
                 </div>
                     

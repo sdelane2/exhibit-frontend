@@ -21,14 +21,14 @@ class Artwork extends React.Component {
 
     state = {
         exhibition_id: null,
-        gallery_artwork_id: null
+        artwork_id: null
     }
 
 
     handleChange = event => {
         this.setState({
             exhibition_id: event.target.value,
-            gallery_artwork_id: this.props.artwork.id
+            artwork_id: this.props.artwork.id
 
         })
     }
@@ -37,7 +37,7 @@ class Artwork extends React.Component {
         e.preventDefault()
         const newArtwork = {
             exhibition_id: this.state.exhibition_id,
-            gallery_artwork_id: this.state.gallery_artwork_id
+            artwork_id: this.state.artwork_id
         }
 
         this.props.addToExhibition(newArtwork)

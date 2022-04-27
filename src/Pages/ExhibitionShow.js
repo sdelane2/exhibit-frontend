@@ -27,7 +27,7 @@ class ExhibitionShow extends React.Component {
         
 
         console.log(this.props.myExhibitedArtworks)
-        let artworks = this.props.myExhibitedArtworks.map(artwork =>  <Artwork artwork={artwork.gallery_artwork} container={true} exhibited_artwork={artwork} addFavoriteArtwork={this.props.addFavoriteArtwork} faves={this.props.faves} deleteFaveArtwork={this.props.deleteFaveArtwork} user={this.props.user} />)
+        let artworks = this.props.myExhibitedArtworks.map(artwork =>  <Artwork artwork={artwork.artwork} container={true} exhibited_artwork={artwork} addFavoriteArtwork={this.props.addFavoriteArtwork} faves={this.props.faves} deleteFaveArtwork={this.props.deleteFaveArtwork} user={this.props.user} />)
         return(
             <>
             {this.props.page ?

@@ -22,7 +22,7 @@ class ExhibitionEdit extends React.Component {
     render(){
         console.log(this.props.myExhibitedArtworks)
 
-        let artworks = this.props.myExhibitedArtworks.map(artwork =>  <ExhibitedArtwork artwork={artwork.gallery_artwork} coverImage={artwork.cover_image} deleteArtwork={this.props.deleteArtwork} id={artwork.id} />)
+        let artworks = this.props.myExhibitedArtworks.map(artwork =>  <ExhibitedArtwork artwork={artwork.artwork} coverImage={artwork.cover_image} deleteArtwork={this.props.deleteArtwork} id={artwork.id} />)
         let exhibition = this.props.exhibitions.find(exhibition => exhibition.id === parseInt(this.props.match.params.id))
         return(
             <>

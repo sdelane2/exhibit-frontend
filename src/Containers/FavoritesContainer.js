@@ -29,7 +29,7 @@ class FavoritesContainer extends React.Component {
         if(this.props.artworks.length < 1){
             return "You don't have any favorites ...yet!"
         }
-       return this.props.artworks.map(artwork =>  <Artwork artwork={artwork.gallery_artwork} container={true} exhibited_artwork={artwork.exhibited_artwork} exhibitions={this.props.exhibitions} addFavoriteArtwork={this.props.addFavoriteArtwork} user={this.props.user} faves={this.props.artworks} deleteFaveArtwork={this.props.deleteFaveArtwork} />)
+       return this.props.artworks.map(artwork =>  <Artwork artwork={artwork.artwork} container={true} exhibited_artwork={artwork.exhibited_artwork} exhibitions={this.props.exhibitions} addFavoriteArtwork={this.props.addFavoriteArtwork} user={this.props.user} faves={this.props.artworks} deleteFaveArtwork={this.props.deleteFaveArtwork} />)
         
     }
     render(){
